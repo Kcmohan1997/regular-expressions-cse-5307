@@ -1,0 +1,252 @@
+#----------------------------------------------------------------------
+Programming Assignment 03
+
+#----------------------------------------------------------------------
+Purpose:
+
+  * Demonstrate (elementary) understanding of Regular Expressions
+    and how to use them in various useful languages.
+
+#----------------------------------------------------------------------
+Background:
+
+  * The input file will have multiple proposed tokens on each
+    line.  There also might be lines with no proposed tokens
+    and / or just or extra whitespace.
+
+  * The proposed tokens will be separated by whitespace, which is
+    to be ignored.
+
+  * Your program will consider successive tokens from the input
+    file and classify them as 'FP', 'STR', 'INT', or
+    'does not match'.
+
+  * An FP is one or more decimal digits, followed by a right
+    parenthesis, followed by a left parenthesis, followed by
+    one or more decimal digits.
+
+  * A STR is a vertical bar (|) followed by zero or more uppercase
+    letters and decimal digits followed by a plus sign (+).
+
+  * An INT is a octothorpe sign (#) followed by one or more
+    decimal digits or letters R through W.  The letters may be
+    uppercase or lowercase.  (That is, r through w are allowed.)
+
+#----------------------------------------------------------------------
+Examples:
+
+  000)(000  is a legal FP.
+  1)(1      is a legal FP.
+  )000      is not a legal FP.
+  000(      is not a legal FP.
+  1.1       is not a legal FP.
+
+  |+        is a legal STR.
+  |1+       is a legal STR.
+  |HITHERE+ is a legal STR.
+  |a+       is not a legal STR.
+  "abc"     is not a legal STR.
+  A+        is not a legal STR.
+  |A        is not a legal STR.
+
+  #rSt      is a legal INT.
+  #0        is a legal INT.
+  #r0       is a legal INT.
+  #W        is a legal INT.
+  123       is not a legal INT.
+  rSt       is not a legel INT.
+
+#----------------------------------------------------------------------
+Tasks:
+
+  1. Download HMWK_03_dalioba.zip from Blackboard.
+
+  2. Unzip the file somewhere convenient.
+
+  3. Change 'dalioba' in the name of the directory to your NetID.
+     (Your NetID is three letters followed by four or five digits.
+      The directory name will now be something like
+      'hmwk_03_abc1234', with YOUR NetID instead of 'abc1234'.)
+
+  4. Look in that directory.
+
+  5. Change the header lines in the skeleton files
+     hmwk_03.cs / .java / .py.
+
+      -- Line 1:  Family name first, then a comma, then
+                  personal name.
+
+      -- Line 2:  Your NetID.
+
+      -- Line 3:  The date you edited the file.
+
+  6. Run the files you just changed with the provided
+     'inputdata.text' as the input file.
+
+  7. Observe the following output (it will be the same no matter
+     which language you picked):
+
+processing tokens from inputdata.txt ...
+>000)(000< is the proposed token.
+>1)(1< is the proposed token.
+>)000< is the proposed token.
+>000(< is the proposed token.
+>1.1< is the proposed token.
+>|+< is the proposed token.
+>|1+< is the proposed token.
+>|HITHERE+< is the proposed token.
+>|a+< is the proposed token.
+>"abc"< is the proposed token.
+>A+< is the proposed token.
+>|A< is the proposed token.
+>#rSt< is the proposed token.
+>#0< is the proposed token.
+>#r0< is the proposed token.
+>#W< is the proposed token.
+>123< is the proposed token.
+>rSt< is the proposed token.
+
+  8. Now, change the contents of processToken() function in each
+     of the hmwk_03.cs, .java, and .py files to use the regular
+     expression support of the corresponding language so that the
+     following output is generated for the 'inputdata.txt' test
+     case file.
+
+processing tokens from inputdata.txt ...
+>000)(000< matches FP
+>1)(1< matches FP
+>)000< does not match
+>000(< does not match
+>1.1< does not match
+>|+< matches STR
+>|1+< matches STR
+>|HITHERE+< matches STR
+>|a+< does not match
+>"abc"< does not match
+>A+< does not match
+>|A< does not match
+>#rSt< matches INT
+>#0< matches INT
+>#r0< matches INT
+>#W< matches INT
+>123< does not match
+>rSt< does not match
+
+  9. You should get the same output for each of the three
+     languages.  Make your output match this format EXACTLY since
+     when your solutions are tested, their output will be checked
+     using diff.
+
+#----------------------------------------------------------------------
+Submission:
+
+Make a zipfile of your 'hmwk_03_abc1234' directory (where
+'abc1234' is replaced with YOUR NetID) and submit it on Blackboard
+as your results for this assignment.  Your submission should be a
+zipfile that has exactly one item in it, a directory named
+'hmwk_03_abc1234' (where 'abc1234' is YOUR NetID).  Inside that
+directory should be three source files, hmwk_03.cs, hmwk_03.java,
+and hmwk_03.py.
+
+Your submission will be run on another file of test data.
+That file will have 20 possible tokens and your solutions will
+score 1/2 point for each token that generates the correct message.
+
+Therefore, the maximum possible score for this homework assignment
+is 30 points (10 + 10 + 10).
+
+#----------------------------------------------------------------------
+Hints:
+  1. Ensure your programs compile and run correctly.  Not
+     compiling or not generating the correct output will cost you
+     points.
+
+     Ensure your output messages match the format shown above when
+     you change the processToken() function.  The output is going
+     to be checked by a program, so it has to match EXACTLY.
+
+     After you write your programs, use diff or fc to compare
+     your output to the supplied 'outputdata.txt'.  It must match
+     EXACTLY or you will be penalized points.
+
+     ('EXACTLY' means character-by-character the same.  No, e.g.,
+      differences in spacing, no changes in wording, no changes
+      in punctuation, and so forth.  Check your output against
+      the 'outputdata.txt' file!)
+
+  2. Ensure that you update the three header lines in each of the
+     source files with YOUR name (family name first, then a comma,
+     then your personal name), YOUR NetID, and the date you edit
+     the file.
+
+     Not updating the header lines properly will cost you points.
+
+  3. DO NOT change anything in the 'Main' (C#) or 'main' (Java,
+     Python) functions.  Those routines will pump the proposed
+     tokens into the processToken() function for you.
+
+     Your programs will be tested from the command line.  If they
+     do not run correctly when run that way, you will score
+     ZERO points.
+
+  4. You might use some lines of static code aside from changing
+     the contents of processToken().  (This will depend on how you
+     decide to do the regular expressions.)
+
+  5. Ensure you use the regular expression support of the
+     language.  Programs that do not do all of their matching
+     using regular expressions will score ZERO points.
+
+  6. These programs are not complex.  The processToken() routine
+     in the C# reference solution is 15 lines of code, including
+     some static data.  For Java, it's 12 lines of code.  For
+     Python, it's 16 lines of code, including some static data.
+     If you find yourself writing lots more code than this, you're
+     probably going down the wrong path.
+
+  7. After you write your regular expressions, make up some test
+     cases of your own to ensure that your REs really match the
+     descriptions given above.  The test cases in 'inputdata.txt'
+     are useful, but they are NOT comprehensive.  Make up some
+     more of your own.  This is so important that the first twelve
+     persons who send me an email with twelve additional (and
+     different) test tokens will score a bonus point.  Three each
+     should be legal tokens for FP, STR, and INT and three should
+     be illegal tokens (that is, they do not match any category).
+     Think hard because to score the bonus point your twelve
+     proposed tokens have to be different from those anyone else
+     has already sent me.  The illegal tokens should be CLOSE to
+     the token definitions, but not quite correct.  No proposed
+     test token should be more than ten characters long.
+
+  8. Ensure your submission to Blackboard is packaged EXACTLY as
+     described above.
+
+      -- Your submission should be a ZIP FILE (not a tar, rar, gz,
+         or any other kind of compressed file).
+
+      -- The zip file should be named 'hmwk_03_abc1234.zip' (with
+         'abc1234' replaced with YOUR NetID).
+
+      -- This zip file should have ONE item in it, a directory
+         named 'hmwk_03_abc1234'  (with 'abc1234' replaced with
+         YOUR NetID).
+
+      -- Your source files should be in that directory.  The
+         source files should be named hmwk_03.cs / .java / .py.
+
+     Submissions in the wrong format score ZERO points.
+
+  9. After you submit your zip file on Blackboard, download it
+     from Blackboard and check that your submission is in the
+     proper format, that the programs run and print the correct
+     output, and that you updated the header lines correctly in
+     each of the source files.
+
+ 10. Are you CERTAIN you complied with all of these nit-picking
+     instructions?  Really?  Maybe you ought to check just one
+     more time. :)  
+
+#----------------------------------------------------------------------
+
+
